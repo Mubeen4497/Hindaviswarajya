@@ -5,11 +5,15 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
 import logoImage from 'figma:asset/96f14b6013fa7443febe54311b23cd3f8d928624.png';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface LoginScreenProps {
   onLogin: (email: string, password: string) => void;
   onSwitchToSignup: () => void;
 }
+
+// const Navigateto = useNavigate()
 
 export default function LoginScreen({ onLogin, onSwitchToSignup }: LoginScreenProps) {
   const [email, setEmail] = useState("");
@@ -43,11 +47,31 @@ export default function LoginScreen({ onLogin, onSwitchToSignup }: LoginScreenPr
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      onLogin(email, password);
-    }
+    	try {
+				const res = await axios.post("http://localhost:8000/user/login", {
+					email,
+					password,
+				});
+
+				alert("Login Successful!");
+
+				// Store token if backend sends it
+				if (res.data.token) {
+					localStorage.setItem("token", res.data.token);
+				}
+
+				// You can redirect or call parent function if needed
+				// onLogin(email, password);  // optional
+			} catch (err: any) {
+				const msg = err.response?.data || "Login failed. Try again.";
+				alert(msg);
+			}
+
+      if (validateForm()) {
+				onLogin(email, password);
+			}
   };
 
   return (

@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
 import logoImage from 'figma:asset/96f14b6013fa7443febe54311b23cd3f8d928624.png';
+import axios from 'axios'
 
 interface SignupScreenProps {
   onSignup: (userData: {
@@ -93,17 +94,34 @@ export default function SignupScreen({ onSignup, onSwitchToLogin }: SignupScreen
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      onSignup({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        location: formData.location,
-      });
-    }
-  };
+ const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (!validateForm()) return;
+
+		try {
+			const res = await axios.post("http://localhost:8000/user/signup", {
+				fullName: formData.name,
+				email: formData.email,
+				location: formData.location,
+				password: formData.password,
+			});
+
+			console.log("Signup Success:", res.data);
+
+			alert("Signup Successful!");
+			onSwitchToLogin(); // redirect to login
+		} catch (err: any) {
+			console.error("Signup Error:", err);
+
+			if (err.response?.data?.message) {
+				alert(err.response.data.message);
+			} else {
+				alert("Something went wrong. Try again.");
+			}
+		}
+ };
+
 
   const handleChange = (field: string, value: string) => {
     setFormData({ ...formData, [field]: value });
