@@ -1,5 +1,5 @@
 {
-      "name": "hindavi-swarajya",
+      "name": "home-screen-layout",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
@@ -49,13 +49,16 @@
       },
       "devDependencies": {
             "@types/node": "^20.10.0",
-            "@types/react": "^19.2.7",
-            "@types/react-dom": "^19.2.3",
             "@vitejs/plugin-react-swc": "^3.10.2",
-            "vite": "^5.4.19"
+            "vite": "6.3.5"
       },
       "scripts": {
             "dev": "vite",
             "build": "vite build"
-      }
+      },
+      "description": "This is a code bundle for Home Screen Layout. The original project is available at https://www.figma.com/design/XfhmQ7lEsPUZ0rmiCpZVTh/Home-Screen-Layout.",
+      "main": "index.js",
+      "keywords": [],
+      "author": "",
+      "license": "ISC"
 }

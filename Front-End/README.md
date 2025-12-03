@@ -1,7 +1,7 @@
 
-  # HindaviSwarajya Community Platform
+  # Home Screen Layout
 
-  This is a code bundle for HindaviSwarajya Community Platform. The original project is available at https://www.figma.com/design/wsfi579AS0ZaqxT2dN1afT/HindaviSwarajya-Community-Platform.
+  This is a code bundle for Home Screen Layout. The original project is available at https://www.figma.com/design/XfhmQ7lEsPUZ0rmiCpZVTh/Home-Screen-Layout.
 
   ## Running the code
 
